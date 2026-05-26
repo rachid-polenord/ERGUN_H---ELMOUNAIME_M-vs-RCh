@@ -1,17 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Page 1</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chenapan</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 40px; text-align: center; }
-    h1 { font-size: 150px; margin-bottom: 12px; }
-    p { font-size: 100px; margin: 8px 0; }
-    a { font-size: 20px; color: #0066cc; text-decoration: none; display: inline-block; margin-top: 20px; }
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --accent:#2b6cb0;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --radius:12px;
+      --maxw:900px;
+      --pad:36px;
+      --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:var(--font-sans);
+      background:linear-gradient(180deg,var(--bg),#eef2ff 60%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .container{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px 24px;
+      box-sizing:border-box;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--maxw);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(20,24,40,0.08);
+      padding:var(--pad);
+      box-sizing:border-box;
+      border:1px solid rgba(15,23,42,0.04);
+    }
+
+    header{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .badge{
+      background:var(--accent);
+      color:white;
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:14px;
+      box-shadow:0 4px 18px rgba(43,108,176,0.18);
+    }
+
+    h1{
+      margin:0;
+      font-size:28px;
+      line-height:1.05;
+      letter-spacing:-0.01em;
+    }
+
+    p.lead{
+      margin:18px 0 28px 0;
+      font-size:20px;
+      color:var(--muted);
+      max-width:78%;
+    }
+
+    .content{
+      font-size:22px;
+      line-height:1.45;
+      color:var(--text);
+      background:linear-gradient(90deg, rgba(235,245,255,0.6), rgba(255,255,255,0.6));
+      padding:28px;
+      border-radius:10px;
+      border:1px solid rgba(43,108,176,0.06);
+    }
+
+    .content p{ margin:0; }
+
+    footer{
+      margin-top:20px;
+      font-size:13px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    @media (max-width:560px){
+      .content{ font-size:18px; padding:20px; }
+      h1{ font-size:20px; }
+      p.lead{ font-size:16px; max-width:100%; }
+    }
   </style>
 </head>
 <body>
-  <h1>Page 1</h1>
-  <p>Ceci est la page 1</p>
+  <div class="container">
+    <section class="card" role="article" aria-labelledby="titre">
+      <header>
+        <div class="badge">Lexicographie</div>
+        <div>
+          <h1 id="titre">Évolution du sens du mot 'chenapan'</h1>
+          <p class="lead">Brève explication historique et nuance actuelle</p>
+        </div>
+      </header>
+
+      <div class="content">
+        <p>Oui, en grande partie. Le mot a d’abord eu un sens franchement négatif, proche de « voleur », « vaurien » ou « mauvais garçon », puis il s’est adouci avec le temps pour devenir, dans certains contextes, un petit nom taquin ou affectueux comme « petit chenapan ».</p>
+      </div>
+
+      <footer>
+        <span>Présentation — mise en forme large</span>
+        <span aria-hidden="true">—</span>
+      </footer>
+    </section>
+  </div>
 </body>
 </html>
