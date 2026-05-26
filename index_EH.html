@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Présentations</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: #0f0f0f;
+      font-family: 'DM Sans', sans-serif;
+      color: #e8e8e8;
+      overflow: hidden;
+    }
+
+    #topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 48px;
+      background: #141414;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 2px;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .nav-item {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #ffffff;
+      background: transparent;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-item:hover {
+      color: #e8e8e8;
+      background: #1e1e1e;
+    }
+    .nav-item.active {
+      background: #c8f542;
+      color: #0f0f0f;
+      font-weight: 600;
+    }
+
+    #frame-wrap {
+      position: fixed;
+      top: 48px;
+      left: 0; right: 0; bottom: 0;
+    }
+
+    #main-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #fff;
+      display: none;
+    }
+
+    #placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="topbar"></div>
+
+<div id="frame-wrap">
+  <div id="placeholder">Sélectionnez une page</div>
+  <iframe id="main-frame"></iframe>
+</div>
+<script src="assets/navigation.js"></script>
+<script>
+  // ── MODIFIEZ UNIQUEMENT CETTE LISTE ──
+  const pages = [
+    "pages/accueil.html",
+    "composition/composition.html",
+    "boitiers/boitiers.html",
+    "poubelles/poubelles.html",
+    "listes/listes.html",
+    "pages/page1.html",
+    "pages/page2.html"
+  ];
+  // ─────────────────────────────────────
+
+  const topbar      = document.getElementById('topbar');
+  const frame       = document.getElementById('main-frame');
+  const placeholder = document.getElementById('placeholder');
+
+  pages.forEach(file => {
+    const label = file.split('/').pop().replace('.html', '');
+    const btn = document.createElement('button');
+    btn.className   = 'nav-item';
+    btn.textContent = label;
+    btn.title       = label;
+    btn.onclick     = () => navigate(file, btn);
+    topbar.appendChild(btn);
+  });
+
+  // Charge la page par défaut
+  const firstBtn = topbar.querySelector('.nav-item');
+  if (firstBtn) navigate(pages[0], firstBtn);
+
+  function navigate(file, btn) {
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    placeholder.style.display = 'none';
+    frame.style.display = 'block';
+    frame.src = file;
+  }
+</script>
+
+</body>
+</html>

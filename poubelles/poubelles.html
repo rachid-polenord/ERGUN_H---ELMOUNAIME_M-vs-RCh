@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Galerie sans scroll vertical</title>
+<style>
+  :root{ --gap:12px; --topbar-h:64px; --cols:5; }
+  html,body{ height:100%; margin:0; }
+  body{
+    font-family:system-ui, sans-serif;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    box-sizing:border-box;
+  }
+  .topbar{
+    height:var(--topbar-h);
+    display:flex;
+    align-items:center;
+    padding:0 16px;
+    background:#f8f9fb;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+  }
+  .container{
+    /* espace restant disponible pour la galerie */
+    flex:1 1 auto;
+    padding:16px 16px 16px 16px;
+    box-sizing:border-box;
+    overflow:hidden; /* empêche le scroll vertical */
+  }
+  .gallery{
+    height:100%;
+    display:grid;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    gap:var(--gap);
+    align-content:start;
+  }
+  .gallery img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    aspect-ratio:3/4;
+    border-radius:4px;
+    display:block;
+    background:#eaeef2;
+  }
+
+  /* Réduire automatiquement le ratio pour éviter overflow si nécessaire */
+  @media (max-width:900px){
+    :root{ --cols:3; }
+  }
+  @media (max-width:600px){
+    :root{ --cols:2; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar" id="topbar">dimanche 17-05-2026</div>
+  <div class="container">
+    <div class="gallery">
+      <img src="poubelles_A.jpg" alt="A"><img src="poubelles_B.jpg" alt="B"><img src="poubelles_C.jpg" alt="C"><img src="poubelles_D.jpg" alt="D"><img src="poubelles_E.jpg" alt="E">
+      <img src="poubelles_F.jpg" alt="F"><img src="poubelles_G.jpg" alt="G"><img src="poubelles_H.jpg" alt="H"><img src="poubelles_I.jpg" alt="I"><img src="poubelles_J.jpg" alt="J">
+    </div>
+  </div>
+</body>
+</html>
