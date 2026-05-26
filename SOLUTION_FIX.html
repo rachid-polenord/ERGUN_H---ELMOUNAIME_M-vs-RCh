@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution - Correction du Workflow GitHub Pages</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .error-box {
+            background: #ffeef0;
+            border-left: 4px solid #d73a49;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 6px;
+        }
+        
+        .error-title {
+            color: #d73a49;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .error-box code {
+            background: #f6f8fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e4e8;
+        }
+        
+        .section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            background: #f6f8fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .step p {
+            margin-bottom: 10px;
+        }
+        
+        .code-block {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .code-block code {
+            color: #61dafb;
+        }
+        
+        .highlight {
+            background: #fff8e1;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .highlight strong {
+            color: #e65100;
+        }
+        
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .success-box p {
+            color: #22863a;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+        
+        .footer {
+            background: #f6f8fa;
+            padding: 20px;
+            text-align: center;
+            color: #586069;
+            font-size: 0.9em;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Solution Workflow GitHub</h1>
+            <p>Correction du job défaillant - Pages Build Deployment</p>
+        </div>
+        
+        <div class="content">
+            <!-- Section Erreur -->
+            <div class="section">
+                <h2>❌ Quel est le problème ?</h2>
+                <div class="error-box">
+                    <div class="error-title">Erreur détectée :</div>
+                    <p>L'action GitHub <code>actions/jekyll-build-pages@v1</code> ne peut pas être téléchargée.</p>
+                    <p style="margin-top: 10px; color: #666;">
+                        <strong>URL problématique :</strong><br>
+                        <code style="display: block; margin-top: 8px; padding: 10px; background: #fff5f7; overflow-x: auto;">
+                            https://codeload.github.com/actions/jekyll-build-pages/tar.gz/44a6e6beabd48582f863aeeb6cb2151cc1716697
+                        </code>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Section Cause -->
+            <div class="section">
+                <h2>🔍 Pourquoi c'est arrivé ?</h2>
+                <p>Votre workflow utilise une <strong>version de commit très spécifique</strong> de l'action Jekyll Build Pages. Cette version n'est plus disponible ou le lien est cassé.</p>
+                <div class="highlight">
+                    <strong>💡 Solution :</strong> Utiliser la dernière version stable de l'action au lieu d'une version de commit spécifique.
+                </div>
+            </div>
+            
+            <!-- Section Étapes -->
+            <div class="section">
+                <h2>📋 Comment corriger dans GitHub ?</h2>
+                
+                <h3>Étape 1 : Aller au fichier de workflow</h3>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <p><strong>Cliquez sur l'onglet "Code"</strong> en haut de votre repository</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <p><strong>Ouvrez le dossier ".github"</strong></p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <p><strong>Ouvrez le dossier "workflows"</strong></p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <p><strong>Cliquez sur le fichier "pages-build-deployment.yml"</strong></p>
+                </div>
+                
+                <h3>Étape 2 : Éditer le fichier</h3>
+                <div class="step">
+                    <span class="step-number">5</span>
+                    <p><strong>Cliquez sur le crayon ✏️</strong> en haut à droite du fichier pour l'éditer</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">6</span>
+                    <p><strong>Cherchez la ligne avec "jekyll-build-pages"</strong></p>
+                    <div class="code-block"><code>- uses: actions/jekyll-build-pages@v1</code></div>
+                </div>
+                
+                <h3>Étape 3 : Modifier la ligne</h3>
+                <div class="step">
+                    <span class="step-number">7</span>
+                    <p><strong>Si vous voyez un commit SHA</strong>, remplacez-le :</p>
+                    <p style="margin-top: 10px; color: #d73a49;"><strong>❌ Avant :</strong></p>
+                    <div class="code-block"><code>- uses: actions/jekyll-build-pages@44a6e6b</code></div>
+                    <p style="margin-top: 15px; color: #28a745;"><strong>✅ Après :</strong></p>
+                    <div class="code-block"><code>- uses: actions/jekyll-build-pages@v1</code></div>
+                </div>
+                
+                <h3>Étape 4 : Sauvegarder</h3>
+                <div class="step">
+                    <span class="step-number">8</span>
+                    <p><strong>Allez en bas de la page</strong></p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">9</span>
+                    <p><strong>Cliquez sur "Commit changes"</strong> (bouton vert)</p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">10</span>
+                    <p><strong>Ajoutez un message :</strong></p>
+                    <div class="code-block"><code>Fix: Update jekyll-build-pages action version</code></div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">11</span>
+                    <p><strong>Cliquez sur "Commit changes"</strong> à nouveau</p>
+                </div>
+                
+                <h3>Étape 5 : Relancer le workflow</h3>
+                <div class="step">
+                    <span class="step-number">12</span>
+                    <p><strong>Allez dans l'onglet "Actions"</strong></p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">13</span>
+                    <p><strong>Cliquez sur le workflow "pages"</strong> ou <strong>"pages-build-deployment"</strong></p>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">14</span>
+                    <p><strong>Cliquez sur "Run workflow"</strong> (bouton bleu)</p>
+                </div>
+            </div>
+            
+            <!-- Section Résumé -->
+            <div class="section">
+                <h2>📝 Résumé des changements</h2>
+                <div class="highlight">
+                    <p><strong>Fichier à modifier :</strong> <code>.github/workflows/pages-build-deployment.yml</code></p>
+                    <p style="margin-top: 10px;"><strong>Changement :</strong> Remplacer le commit SHA par <code>@v1</code></p>
+                    <p style="margin-top: 10px;"><strong>Raison :</strong> Utiliser une version stable et disponible de l'action</p>
+                </div>
+            </div>
+            
+            <!-- Section Succès -->
+            <div class="success-box">
+                <p><span class="emoji">✅</span> Voilà ! Le job devrait fonctionner maintenant ! <span class="emoji">🚀</span></p>
+            </div>
+            
+            <!-- Section Liens -->
+            <div class="section" style="text-align: center; margin-top: 40px;">
+                <h3>Liens utiles</h3>
+                <p style="margin-bottom: 15px;">
+                    <a href="https://github.com/rachid-polenord/ERGUN_H---ELMOUNAIME_M-vs-RCh" class="button">
+                        Aller au repository
+                    </a>
+                </p>
+                <p>
+                    <a href="https://github.com/rachid-polenord/ERGUN_H---ELMOUNAIME_M-vs-RCh/actions/runs/26447663097/job/77860110111">
+                        Voir le job en détail
+                    </a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Solution générée automatiquement par GitHub Copilot</p>
+            <p style="margin-top: 10px; font-size: 0.85em;">Dernière mise à jour : 26 mai 2026</p>
+        </div>
+    </div>
+</body>
+</html>
