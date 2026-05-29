@@ -8,8 +8,8 @@
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#e8e8e8}
     .wrap{margin:32px 0;padding:0 32px;background:#e8e8e8;border-radius:10px}
     .header{padding:24px 0 16px 0}
-    .header h1{margin:0 0 6px 0;font-size:22px;font-weight:700;color:#222}
-    .header p{margin:0;font-size:14px;color:#555}
+    .header h1{margin:0 0 6px 0;font-size:28px;font-weight:700;color:#222}
+    .header p{margin:0;font-size:18px;color:#555}
 
     /* Bloc de texte libre */
     .note-block{
@@ -22,7 +22,7 @@
       padding:16px;
       margin:16px 0 24px 0;
       color:#222;
-      font-size:14px;
+      font-size:18px;
       line-height:1.4;
       outline:none;
     }
@@ -34,16 +34,65 @@
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:24px}
     @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:600px){.grid{grid-template-columns:1fr}}
-    .card{display:flex;background:#d0d0d0;border-radius:8px;overflow:hidden;border:1px solid #bbb;min-height:110px;text-decoration:none;color:inherit}
+    .card{display:flex;background:#d0d0d0;border-radius:8px;overflow:hidden;border:1px solid #bbb;min-height:110px;text-decoration:none;color:inherit;cursor:pointer}
     .img-slot{width:90px;flex:0 0 90px;margin:8px 0 8px 8px;border-radius:6px;background:#a0a0a0;overflow:hidden}
     .img-slot img{width:100%;height:100%;object-fit:cover;display:block}
     .content{flex:1;padding:10px 12px;display:flex;flex-direction:column;justify-content:center}
-    .title{margin:0 0 5px 0;font-size:14px;font-weight:700;color:#222}
-    .desc{margin:0 0 8px 0;font-size:12px;color:#444;line-height:1.5}
-    .lien{font-size:12px;color:#335;text-decoration:underline}
+    .title{margin:0 0 5px 0;font-size:18px;font-weight:700;color:#222}
+    .desc{margin:0 0 8px 0;font-size:16px;color:#444;line-height:1.5}
+    .lien{font-size:16px;color:#335;text-decoration:underline}
+
+    /* Modale */
+    #modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.4);
+      z-index:1000;
+      align-items:center;
+      justify-content:center;
+    }
+    #modal.open{display:flex}
+    #modal-box{
+      background:#fff;
+      border-radius:10px;
+      padding:40px 24px 24px 24px;
+      max-width:90vw;
+      max-height:90vh;
+      overflow:auto;
+      position:relative;
+    }
+    #modal-box img{
+      display:block;
+      max-width:80vw;
+      max-height:75vh;
+      border-radius:6px;
+    }
+    #modal-close{
+      position:absolute;
+      top:8px;right:12px;
+      font-size:22px;
+      color:#333;
+      cursor:pointer;
+      line-height:1;
+      user-select:none;
+      background:#eee;
+      border-radius:50%;
+      width:28px;height:28px;
+      display:flex;align-items:center;justify-content:center;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Modale -->
+  <div id="modal" onclick="closeModal()">
+    <div id="modal-box" onclick="event.stopPropagation()">
+      <span id="modal-close" onclick="closeModal()">&#x2715;</span>
+      <img id="modal-img" src="" alt="annotation" />
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="header">
       <h1>
@@ -57,8 +106,8 @@
 
     <div class="grid">
 
-      <a class="card" href="#">
-        <div class="img-slot"><img src="1_harcellement.jpg" alt="argument 1" /></div>
+      <a class="card" href="#" onclick="openModal('image1_annotation.jpg');return false;">
+        <div class="img-slot"><img src="image1.jpg" alt="argument 1" /></div>
         <div class="content">
           <h3 class="title">Harcèlement moral continu</h3>
           <p class="desc">Harcèlement moral continu et ciblé depuis &gt;1,5 an, attesté par description détaillée des faits.</p>
@@ -66,8 +115,8 @@
         </div>
       </a>
 
-      <a class="card" href="#">
-        <div class="img-slot"><img src="2_isolement.jpg" alt="argument 2" /></div>
+      <a class="card" href="#" onclick="openModal('image2_annotation.jpg');return false;">
+        <div class="img-slot"><img src="image2.jpg" alt="argument 2" /></div>
         <div class="content">
           <h3 class="title">Isolement professionnel</h3>
           <p class="desc">Isolement professionnel et discrédit intentionnel (refus de parler, exclusion des tâches).</p>
@@ -75,7 +124,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image3_annotation.jpg');return false;">
         <div class="img-slot"><img src="image3.jpg" alt="argument 3" /></div>
         <div class="content">
           <h3 class="title">Impact sur la mission</h3>
@@ -84,7 +133,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image4_annotation.jpg');return false;">
         <div class="img-slot"><img src="image4.jpg" alt="argument 4" /></div>
         <div class="content">
           <h3 class="title">Préjudices factuels répétitifs</h3>
@@ -93,7 +142,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image5_annotation.jpg');return false;">
         <div class="img-slot"><img src="image5.jpg" alt="argument 5" /></div>
         <div class="content">
           <h3 class="title">Preuve témoin datée</h3>
@@ -102,7 +151,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image6_annotation.jpg');return false;">
         <div class="img-slot"><img src="image6.jpg" alt="argument 6" /></div>
         <div class="content">
           <h3 class="title">Accusations non fondées</h3>
@@ -111,7 +160,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image7_annotation.jpg');return false;">
         <div class="img-slot"><img src="image7.jpg" alt="argument 7" /></div>
         <div class="content">
           <h3 class="title">Biais managérial apparent</h3>
@@ -120,7 +169,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image8_annotation.jpg');return false;">
         <div class="img-slot"><img src="image8.jpg" alt="argument 8" /></div>
         <div class="content">
           <h3 class="title">Effet sur la santé mentale</h3>
@@ -129,7 +178,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image9_annotation.jpg');return false;">
         <div class="img-slot"><img src="image9.jpg" alt="argument 9" /></div>
         <div class="content">
           <h3 class="title">Action formelle engagée</h3>
@@ -138,7 +187,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image10_annotation.jpg');return false;">
         <div class="img-slot"><img src="image10.jpg" alt="argument 10" /></div>
         <div class="content">
           <h3 class="title">Déclaration sur l'honneur</h3>
@@ -147,7 +196,7 @@
         </div>
       </a>
 
-      <a class="card" href="#">
+      <a class="card" href="#" onclick="openModal('image11_annotation.jpg');return false;">
         <div class="img-slot"><img src="image11.jpg" alt="argument 11" /></div>
         <div class="content">
           <h3 class="title">Cadre légal belge</h3>
@@ -159,8 +208,8 @@
     </div>
 
 <div class="note-block">
-  <strong style="font-size:18px">Lexique des arguments</strong><br><br>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:16px">
+  <strong style="font-size:22px">Lexique des arguments</strong><br><br>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;font-size:18px">
     <span>1. Harcèlement moral >1,5 an documenté</span>
     <span>2. Isolement et discrédit intentionnel</span>
     <span>3. Impact sur la mission étudiante</span>
@@ -176,5 +225,20 @@
 </div>
 
   </div>
+
+  <script>
+    function openModal(src){
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal').classList.add('open');
+    }
+    function closeModal(){
+      document.getElementById('modal').classList.remove('open');
+      document.getElementById('modal-img').src = '';
+    }
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') closeModal();
+    });
+  </script>
+
 </body>
 </html>
